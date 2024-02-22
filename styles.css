@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: lightgray;
+    background-color: lightblue;
 }
 
 header {
@@ -45,5 +45,5 @@ footer {
     background-color: teal;
     color: white;
     text-align: center;
-    padding: 20px 0;
+    padding: 5px 0;
 }
