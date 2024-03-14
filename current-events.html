@@ -1,11 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-   
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.min.js"></script>
 
     <title>Current Events</title>
 </head>
@@ -46,43 +49,70 @@
     </section>
 
     <section id="current-events">
-        <div class="container"></div>
-        <h2>Current Events</h2>
-        <div class="event">
-            <h3>3-on-3 Basketball Tournament</h3>
-            <p>Date: March 15, 2024</p>
-            <p>Description: Join us for a fun and competitive 3-on-3 basketball tournament at the local community center. All skill levels are welcome!</p>
-        </div>
-
-        <div class="event">
-            <h3>Basketball Skills Clinic</h3>
-            <p>Date: April 5, 2024</p>
-            <p>Description: Improve your basketball skills with our free skills clinic led by experienced coaches. Open to youth ages 8-14.</p>
-        </div>
-
-        <div class="event">
-            <h3>Charity Basketball Game</h3>
-            <p>Date: May 1, 2024</p>
-            <p>Description: Watch local celebrities and athletes compete in a charity basketball game to raise funds for at-risk youth programs.</p>
-        </div>
-
-    </section>
-    <footer>
         <div class="container">
-            <p>&copy; 2024 Bigger Than Sports Non-Profit Organization</p>
-            <p>
-                <a href="https://www.instagram.com/bts.foundation?igshid=MXA1c3AyNmt2a2Fibw==" target="_blank">
-                    <img src="instagram.png" alt="Instagram" style="width: 20px; height: 20px; vertical-align: middle;">
-                </a>
-                <a href="https://www.linkedin.com/in/gurkirat-brar-878727251" target="_blank">
-                    <img src="linkedin.png" alt="LinkedIn" style="width: 20px; height: 20px; vertical-align: middle;">
-                </a>
-                <a href="https://github.com/ericest89" target="_blank">
-                    <img src="github.png" alt="GitHub" style="width: 20px; height: 20px; vertical-align: middle;">
-                </a>
-            </p>
+            <h2>Current Events</h2>
+            <div id="calendar"></div>
         </div>
-    </footer>
+    </section>
+
+<footer>
+    <div class="container">
+        <p>&copy; <span id="currentYear"></span> Bigger Than Sports Non-Profit Organization</p>
+        <p>
+            <a href="https://www.instagram.com/bts.foundation?igshid=MXA1c3AyNmt2a2Fibw==" target="_blank">
+                <img src="instagram.png" alt="Instagram" style="width: 20px; height: 20px; vertical-align: middle;">
+            </a>
+            <a href="https://www.linkedin.com/in/gurkirat-brar-878727251" target="_blank">
+                <img src="linkedin.png" alt="LinkedIn" style="width: 20px; height: 20px; vertical-align: middle;">
+            </a>
+            <a href="https://github.com/ericest89" target="_blank">
+                <img src="github.png" alt="GitHub" style="width: 20px; height: 20px; vertical-align: middle;">
+            </a>
+        </p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['interaction', 'dayGrid'],
+            editable: true,
+            selectable: true,
+            select: function(info) {
+              var title = prompt('Enter event title:');
+              if (title) {
+                calendar.addEvent({
+                  title: title,
+                  start: info.startStr,
+                  end: info.endStr
+                });
+              }
+              calendar.unselect();
+            },
+            events: [
+              {
+                title: '3-on-3 Basketball Tournament',
+                start: '2024-03-15'
+              },
+              {
+                title: 'Basketball Skills Clinic',
+                start: '2024-04-05'
+              },
+              {
+                title: 'Charity Basketball Game',
+                start: '2024-05-01'
+              }
+            ]
+          });
+          calendar.render();
+        });
+    </script>
 
 </body>
 </html>
